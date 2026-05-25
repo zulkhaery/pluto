@@ -26,6 +26,22 @@ class App
         if (env('APP_DEBUG', true)) {
             error_reporting(E_ALL);
             ini_set('display_errors', '1');
+
+            register_shutdown_function(function () {
+                $error = error_get_last();
+                
+                if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+                    while (ob_get_level() > 0) {
+                        ob_end_clean();
+                    }
+                    
+                    echo '<pre style="background:#1e1e1e;color:#6bff6b;padding:1rem">';
+                    echo htmlspecialchars("Fatal Error: {$error['message']}") . "\n";
+                    echo htmlspecialchars("File: {$error['file']} Line: {$error['line']}");
+                    echo '</pre>';
+                }
+            });
+            
         } else {
             error_reporting(0);
             ini_set('display_errors', '0');

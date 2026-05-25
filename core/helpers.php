@@ -44,7 +44,7 @@ if (!function_exists('abort')) {
     {
         http_response_code($code);
         if ($code === 404) {
-            require __DIR__ . '/../app/Views/error/404.php';
+            require __DIR__ . '/../app/Views/errors/404.php';
         } else {
             echo "<h1>{$code} - {$message}</h1>";
         }

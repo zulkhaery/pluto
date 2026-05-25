@@ -3,5 +3,11 @@
 /.idea
 /.vscode
 /node_modules
+
+/storage/*
+!/storage/.gitkeep
+!/storage/sessions/
+!/storage/sessions/.gitkeep
+
 .DS_Store
 Thumbs.db
